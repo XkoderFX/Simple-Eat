@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 
 import { FavoritesContext } from '../../services/Favorites/Favorites.context';
 
-const FavouriteButton = styled(TouchableOpacity)`
+const FavoriteButton = styled(TouchableOpacity)`
     position: absolute;
     top: 25px;
     right: 25px;
@@ -13,25 +13,25 @@ const FavouriteButton = styled(TouchableOpacity)`
 `;
 
 export const Favourite = ({ restaurant }) => {
-    const { Favorites, addToFavorites, removeFromFavorites } = useContext(
+    const { favorites, addToFavorites, removeFromFavorites } = useContext(
         FavoritesContext
     );
 
-    const isFavourite = Favorites.find((r) => r.placeId === restaurant.placeId);
+    const isFavorite = favorites?.find((r) => r.placeId === restaurant.placeId);
 
     return (
-        <FavouriteButton
+        <FavoriteButton
             onPress={() =>
-                !isFavourite
+                !isFavorite
                     ? addToFavorites(restaurant)
                     : removeFromFavorites(restaurant)
             }
         >
             <AntDesign
-                name={isFavourite ? 'heart' : 'hearto'}
+                name={isFavorite ? 'heart' : 'hearto'}
                 size={24}
-                color={isFavourite ? 'red' : 'white'}
+                color={isFavorite ? 'red' : 'white'}
             />
-        </FavouriteButton>
+        </FavoriteButton>
     );
 };

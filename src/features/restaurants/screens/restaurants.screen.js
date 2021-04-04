@@ -30,7 +30,7 @@ const LoadingContainer = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
     const { isLoading, restaurants } = useContext(RestaurantsContext);
-    const { Favorites } = useContext(FavoritesContext);
+    const { favorites } = useContext(FavoritesContext);
     const [isToggled, setIsToggled] = useState(false);
 
     return (
@@ -50,7 +50,7 @@ export const RestaurantsScreen = ({ navigation }) => {
             />
             {isToggled && (
                 <FavoritesBar
-                    Favorites={Favorites}
+                    favorites={favorites}
                     onNavigate={navigation.navigate}
                 />
             )}

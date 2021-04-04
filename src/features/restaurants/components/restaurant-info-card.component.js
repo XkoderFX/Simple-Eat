@@ -2,7 +2,7 @@ import React from 'react';
 import { SvgXml } from 'react-native-svg';
 import { View } from 'react-native';
 
-import { Favourite } from '../../../components/Favorites/favourite.component';
+import { Favourite } from '../../../components/Favorites/Favorites.component';
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { Text } from '../../../components/typography/text.component';
 import star from '../../../../assets/star';

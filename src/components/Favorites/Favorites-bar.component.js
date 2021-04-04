@@ -8,8 +8,8 @@ import { Text } from '../typography/text.component';
 const FavoritesWrapper = styled.View`
     padding: 10px;
 `;
-export const FavoritesBar = ({ Favorites, onNavigate }) => {
-    if (!Favorites.length) {
+export const FavoritesBar = ({ favorites, onNavigate }) => {
+    if (!favorites.length) {
         return null;
     }
     return (
@@ -19,7 +19,7 @@ export const FavoritesBar = ({ Favorites, onNavigate }) => {
             </Spacer>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {Favorites.map((restaurant) => {
+                {favorites.map((restaurant) => {
                     const key = restaurant.name;
                     return (
                         <Spacer key={key} position="left" size="medium">
