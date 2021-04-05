@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { createContext } from 'react';
 import logError from 'react-native/Libraries/Utilities/logError';
@@ -23,7 +24,9 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, isLoading, error, onLogin }}>
+        <AuthContext.Provider
+            value={{ user, isLoading, error, onLogin, isAuthenticated: false }}
+        >
             {children}
         </AuthContext.Provider>
     );

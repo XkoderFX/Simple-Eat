@@ -15,6 +15,7 @@ import { FavoritesContextProvider } from './src/services/Favorites/Favorites.con
 import { useState } from 'react';
 import { useEffect } from 'react';
 import logError from 'react-native/Libraries/Utilities/logError';
+import { AuthContextProvider } from './src/services/auth/auth.context';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyDwvbfbarxCahQNS3mwHYWeSB9zaTJR4x4',
@@ -59,13 +60,15 @@ export default function App() {
             {oswaldLoaded && latoLoaded && (
                 <>
                     <ThemeProvider theme={theme}>
-                        <FavoritesContextProvider>
-                            <LocationContextProvider>
-                                <RestaurantsContextProvider>
-                                    <Navigation />
-                                </RestaurantsContextProvider>
-                            </LocationContextProvider>
-                        </FavoritesContextProvider>
+                        <AuthContextProvider>
+                            <FavoritesContextProvider>
+                                <LocationContextProvider>
+                                    <RestaurantsContextProvider>
+                                        <Navigation />
+                                    </RestaurantsContextProvider>
+                                </LocationContextProvider>
+                            </FavoritesContextProvider>
+                        </AuthContextProvider>
                     </ThemeProvider>
                     <ExpoStatusBar style="auto" />
                 </>
