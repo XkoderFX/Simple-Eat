@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState([]);
 
     const onLogin = async (email, password) => {
         try {
@@ -17,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
             const user = await loginRequest(email, password);
             setUser(user);
         } catch (error) {
-            logError(error);
+            setError([error.message]);
         } finally {
             setIsLoading(false);
         }
@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, error, onLogin, isAuthenticated: false }}
+            value={{ user, isLoading, error, onLogin, isAuthenticated: !!user }}
         >
             {children}
         </AuthContext.Provider>

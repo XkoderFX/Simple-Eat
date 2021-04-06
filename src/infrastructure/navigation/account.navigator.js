@@ -10,9 +10,9 @@ export const AccountNavigator = () => {
     return (
         <Stack.Navigator headerMode={false}>
             <Stack.Screen name="Main" component={AccountScreen}></Stack.Screen>
-            <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
+            <Stack.Screen name="login" component={LoginScreen}></Stack.Screen>
             <Stack.Screen
-                name="Register"
+                name="register"
                 component={RegisterScreen}
             ></Stack.Screen>
         </Stack.Navigator>
