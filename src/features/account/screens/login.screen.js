@@ -9,11 +9,14 @@ import {
 } from '../components/account.styles';
 import AccountBackground from './Background';
 import { Text } from '../../../components/typography/text.component';
+import { useNavigation } from '@react-navigation/core';
+import { ActivityIndicator, Colors } from 'react-native-paper';
 
 const LoginScreen = () => {
+    const navigation = useNavigation();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const { onLogin, error } = useContext(AuthContext);
+    const { onLogin, error, isLoading } = useContext(AuthContext);
     return (
         <AccountBackground>
             <AccountContainer>
@@ -34,7 +37,6 @@ const LoginScreen = () => {
                         textContentType="password"
                         secureTextEntry
                         autoCapitalize="none"
-                        secure
                         value={password}
                         label="Password"
                         onChangeText={(text) => setPassword(text)}
@@ -46,11 +48,24 @@ const LoginScreen = () => {
                     </Spacer>
                 )}
                 <Spacer>
-                    <AuthButton onPress={() => onLogin(email, password)}>
-                        login
-                    </AuthButton>
+                    {!isLoading ? (
+                        <AuthButton onPress={() => onLogin(email, password)}>
+                            login
+                        </AuthButton>
+                    ) : (
+                        <ActivityIndicator
+                            animating={true}
+                            color={Colors.blue300}
+                        ></ActivityIndicator>
+                    )}
                 </Spacer>
             </AccountContainer>
+
+            <Spacer>
+                <AuthButton onPress={() => navigation.goBack()}>
+                    back
+                </AuthButton>
+            </Spacer>
         </AccountBackground>
     );
 };

@@ -11,6 +11,10 @@ export const AccountContainer = styled.View`
     margin-top: ${(props) => props.theme.space[2]};
 `;
 
+export const AuthTitle = styled.Text`
+    font-size: 30px;
+`;
+
 export const AuthButton = ({ children, onPress }) => {
     return (
         <Button

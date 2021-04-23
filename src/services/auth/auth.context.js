@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { createContext } from 'react';
 import logError from 'react-native/Libraries/Utilities/logError';
-import { loginRequest } from './auth.service';
+import { loginRequest, registerRequest } from './auth.service';
 
 export const AuthContext = createContext();
 
@@ -23,9 +23,33 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
+    const onRegister = async (email, password, repeatedPassword) => {
+        if (password !== repeatedPassword) {
+            setError(["Error passwords don't match"]);
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            const user = await registerRequest(email, password);
+            setUser(user);
+        } catch (error) {
+            setError([error.message]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, error, onLogin, isAuthenticated: !!user }}
+            value={{
+                user,
+                isLoading,
+                error,
+                onLogin,
+                onRegister,
+                isAuthenticated: !!user,
+            }}
         >
             {children}
         </AuthContext.Provider>
