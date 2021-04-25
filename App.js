@@ -9,9 +9,6 @@ import * as firebase from 'firebase';
 import { useFonts as useLato, Lato_400Regular } from '@expo-google-fonts/lato';
 import { theme } from './src/infrastructure/theme';
 import { Navigation } from './src/infrastructure/navigation';
-import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
-import { LocationContextProvider } from './src/services/location/location.context';
-import { FavoritesContextProvider } from './src/services/Favorites/Favorites.context';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import logError from 'react-native/Libraries/Utilities/logError';
@@ -33,20 +30,6 @@ if (!firebase.apps.length) {
 export default function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {
-        const signIn = async () => {
-            try {
-                const user = await firebase
-                    .auth()
-                    .signInWithEmailAndPassword('koder@gmail.com', 'password');
-                setIsAuthenticated(true);
-            } catch (error) {
-                LogError(error);
-            }
-        };
-        signIn();
-    }, []);
-
     const [oswaldLoaded] = useOswald({
         Oswald_400Regular,
     });
@@ -61,13 +44,7 @@ export default function App() {
                 <>
                     <ThemeProvider theme={theme}>
                         <AuthContextProvider>
-                            <FavoritesContextProvider>
-                                <LocationContextProvider>
-                                    <RestaurantsContextProvider>
-                                        <Navigation />
-                                    </RestaurantsContextProvider>
-                                </LocationContextProvider>
-                            </FavoritesContextProvider>
+                            <Navigation />
                         </AuthContextProvider>
                     </ThemeProvider>
                     <ExpoStatusBar style="auto" />

@@ -1,6 +1,8 @@
+import firebase from 'firebase';
 import React from 'react';
 import { useState } from 'react';
 import { createContext } from 'react';
+import { set } from 'react-native-reanimated';
 import logError from 'react-native/Libraries/Utilities/logError';
 import { loginRequest, registerRequest } from './auth.service';
 
@@ -10,6 +12,15 @@ export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState([]);
+
+    firebase.auth().onAuthStateChanged((usr) => {
+        if (usr) {
+            setUser(usr);
+            setIsLoading(false);
+        } else {
+            setIsLoading(false);
+        }
+    });
 
     const onLogin = async (email, password) => {
         try {
@@ -24,13 +35,14 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     const onRegister = async (email, password, repeatedPassword) => {
+        setIsLoading(true);
+
         if (password !== repeatedPassword) {
             setError(["Error passwords don't match"]);
             return;
         }
 
         try {
-            setIsLoading(true);
             const user = await registerRequest(email, password);
             setUser(user);
         } catch (error) {
@@ -38,6 +50,11 @@ export const AuthContextProvider = ({ children }) => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const onLogout = () => {
+        setUser(null);
+        firebase.auth().signOut();
     };
 
     return (
@@ -48,6 +65,7 @@ export const AuthContextProvider = ({ children }) => {
                 error,
                 onLogin,
                 onRegister,
+                onLogout,
                 isAuthenticated: !!user,
             }}
         >
