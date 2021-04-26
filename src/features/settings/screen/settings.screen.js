@@ -48,6 +48,7 @@ export const SettingsScreen = () => {
                 <SettingsItem
                     title="logout"
                     description="logout from your account"
+                    onPress={() => onLogout()}
                     left={(props) => (
                         <List.Icon
                             {...props}
