@@ -7,7 +7,6 @@ import { useContext } from 'react';
 
 export const Navigation = () => {
     const { isAuthenticated } = useContext(AuthContext);
-    console.log(isAuthenticated);
     return (
         <NavigationContainer>
             {isAuthenticated ? <AppNavigator /> : <AccountNavigator />}

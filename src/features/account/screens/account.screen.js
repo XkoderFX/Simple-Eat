@@ -2,10 +2,12 @@ import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import LottieView from 'lottie-react-native';
 import {
     AccountContainer,
     AuthButton,
     AuthTitle,
+    AnimationWrapper,
 } from '../components/account.styles';
 import AccountBackground from './Background';
 const AccountScreen = () => {
@@ -13,6 +15,16 @@ const AccountScreen = () => {
 
     return (
         <AccountBackground>
+            <AnimationWrapper>
+                <LottieView
+                    key="animation"
+                    autoPlay
+                    loop
+                    resizeMode="cover"
+                    source={require('../../../../assets/watermelon.json')}
+                ></LottieView>
+            </AnimationWrapper>
+
             <AuthTitle>Fx Food</AuthTitle>
             <AccountContainer>
                 <Spacer>

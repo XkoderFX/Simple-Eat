@@ -12,12 +12,9 @@ import { FavoritesContext } from '../../../services/Favorites/Favorites.context'
 
 import { Search } from '../components/search.component';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
+import { RestaurantList } from '../components/restaurant-list.component';
 
-const RestaurantList = styled(FlatList).attrs({
-    contentContainerStyle: {
-        padding: 16,
-    },
-})``;
+
 
 const Loading = styled(ActivityIndicator)`
     margin-left: -25px;

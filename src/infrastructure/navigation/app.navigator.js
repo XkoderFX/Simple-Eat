@@ -12,23 +12,14 @@ import { AuthButton } from '../../features/account/components/account.styles';
 import { RestaurantsContextProvider } from '../../services/restaurants/restaurants.context';
 import { LocationContextProvider } from '../../services/location/location.context';
 import { FavoritesContextProvider } from '../../services/Favorites/Favorites.context';
+import { SettingsScreen } from '../../features/settings/screen/settings.screen';
+import { SettingsNavigator } from './settings.navigator';
 
 const Tab = createBottomTabNavigator();
 const TAB_ICON = {
     Restaurants: 'md-restaurant',
     Map: 'md-map',
     Settings: 'md-settings',
-};
-
-const Settings = () => {
-    const { onLogout } = useContext(AuthContext);
-
-    return (
-        <SafeArea>
-            <Text>Settings</Text>
-            <AuthButton onPress={() => onLogout()}>logout</AuthButton>
-        </SafeArea>
-    );
 };
 
 const createScreenOptions = ({ route }) => {
@@ -56,7 +47,7 @@ export const AppNavigator = () => (
                         component={RestaurantsNavigator}
                     />
                     <Tab.Screen name="Map" component={MapScreen} />
-                    <Tab.Screen name="Settings" component={Settings} />
+                    <Tab.Screen name="Settings" component={SettingsNavigator} />
                 </Tab.Navigator>
             </RestaurantsContextProvider>
         </LocationContextProvider>
