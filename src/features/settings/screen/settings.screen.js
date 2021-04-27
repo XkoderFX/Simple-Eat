@@ -7,6 +7,7 @@ import { Avatar, List } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 import { Text } from '../../../components/typography/text.component';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { TouchableOpacity } from 'react-native';
 
 const SettingsItem = styled(List.Item)`
     padding: ${(props) => props.theme.space[2]};
@@ -21,16 +22,18 @@ export const SettingsScreen = () => {
     const navigation = useNavigation();
     return (
         <SafeArea>
-            <AvatarContainer>
-                <Avatar.Icon
-                    size={180}
-                    icon="human"
-                    backgroundColor="#2182BD"
-                ></Avatar.Icon>
-                <Spacer position="top" size="large">
-                    <Text variant="caption">{user.email}</Text>
-                </Spacer>
-            </AvatarContainer>
+            <TouchableOpacity onPress={() => navigation.navigate('Camera')}>
+                <AvatarContainer>
+                    <Avatar.Icon
+                        size={180}
+                        icon="human"
+                        backgroundColor="#2182BD"
+                    ></Avatar.Icon>
+                    <Spacer position="top" size="large">
+                        <Text variant="caption">{user.email}</Text>
+                    </Spacer>
+                </AvatarContainer>
+            </TouchableOpacity>
 
             <List.Section>
                 <SettingsItem
