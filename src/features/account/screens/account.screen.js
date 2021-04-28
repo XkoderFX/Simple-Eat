@@ -25,7 +25,7 @@ const AccountScreen = () => {
                 ></LottieView>
             </AnimationWrapper>
 
-            <AuthTitle>Fx Food</AuthTitle>
+            <AuthTitle>Simple Eat</AuthTitle>
             <AccountContainer>
                 <Spacer>
                     <AuthButton onPress={() => navigation.navigate('login')}>
